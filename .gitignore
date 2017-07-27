@@ -29,3 +29,8 @@
 
 # Docu
 documentation/html/
+
+# Others
+/CMakeLists.txt.user
+/build/
+*~
