@@ -1,7 +1,29 @@
 README                        {#mainpage}
 ======
 
-Welcome to OKVIS: Open Keyframe-based Visual-Inertial SLAM. 
+We create a sample which named `okvis_mynt_eye_sample` in OKVIS to show how to use our MYNT EYE camera.
+
+Before you run `okvis_mynt_eye_sample` in OKVIS, please follow the steps below:
+
+1. Download MYNT EYE SDK [here](https://github.com/slightech/MYNT-EYE-SDK) and follow the tutorial to install it.
+
+2. Follow the normal procedure to install OKVIS.
+
+3. Use `okvis_app_getcameraimucalibdataset` and `okvis_app_getcameracalibdataset` to get calibration dataset and follow the steps in `cameraimu_calibration_guidebook.md` to calibrate camera and imu.
+
+4. Run the `okvis_app_mynteye_sample`,
+
+    ```
+    $ ./okvis_app_mynteye_sample path/to/okvis/config/config_mynteye.yaml 1
+    ```
+
+    `config_mynt_eye.yaml` is the config file, `1` stands for video1.
+
+5. You could know the running effect through the video [here](https://www.youtube.com/watch?v=MB3Fxkj32a8).
+
+---
+
+Welcome to OKVIS: Open Keyframe-based Visual-Inertial SLAM.
 
 This is the Author's implementation of the [1] and [3] with more results in [2].
 

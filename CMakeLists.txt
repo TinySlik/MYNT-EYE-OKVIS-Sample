@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.11)
-
+#
 project(okvis)
 # The version number.
 set(OKVIS_MAJOR_VERSION 1)
@@ -275,8 +275,16 @@ if(${BUILD_TESTS})
 endif()
 
 # BUILD LOCAL DEPENDENCIES
+
+
 include_directories(okvis_util/include)
 add_subdirectory(okvis_util)
+
+if(DEFINED ENV{MYNTEYE_SDK_ROOT})
+  set(MYNTEYE_SDK_DIR $ENV{MYNTEYE_SDK_ROOT})
+endif()
+set(MYNT_SDK_LIB_DIR ${MYNTEYE_SDK_DIR}/lib)
+include_directories(${MYNTEYE_SDK_DIR}/include)
 
 include_directories(okvis_kinematics/include)
 add_subdirectory(okvis_kinematics)
@@ -331,8 +339,59 @@ if(BUILD_APPS)
     pthread 
     ${Boost_LIBRARIES}
   )
+
+  add_executable(okvis_app_getcameracalibdataset okvis_apps/src/okvis_app_getcameracalibdataset.cpp)
+  target_link_libraries(okvis_app_getcameracalibdataset 
+    okvis_util
+    okvis_kinematics
+    okvis_time
+    okvis_cv 
+    okvis_common
+    okvis_ceres
+    okvis_timing
+    okvis_matcher
+    okvis_frontend 
+    okvis_multisensor_processing
+    pthread 
+    ${MYNT_SDK_LIB_DIR}/libmynteye_core.so
+    ${Boost_LIBRARIES}
+  )
+  add_executable(okvis_app_getcameraimucalibdataset okvis_apps/src/okvis_app_getcameraimucalibdataset.cpp)
+  target_link_libraries(okvis_app_getcameraimucalibdataset 
+    okvis_util
+    okvis_kinematics
+    okvis_time
+    okvis_cv 
+    okvis_common
+    okvis_ceres
+    okvis_timing
+    okvis_matcher
+    okvis_frontend 
+    okvis_multisensor_processing
+    pthread 
+    ${MYNT_SDK_LIB_DIR}/libmynteye_core.so
+    ${Boost_LIBRARIES}
+  )
+  add_executable(okvis_app_mynteye_sample okvis_apps/src/okvis_app_mynteye_sample.cpp)
+  target_link_libraries(okvis_app_mynteye_sample 
+    okvis_util
+    okvis_kinematics
+    okvis_time
+    okvis_cv 
+    okvis_common
+    okvis_ceres
+    okvis_timing
+    okvis_matcher
+    okvis_frontend 
+    okvis_multisensor_processing
+    pthread 
+    ${MYNT_SDK_LIB_DIR}/libmynteye_core.so
+    ${Boost_LIBRARIES}
+  )
+
   if(${VISENSORDRIVER_FOUND})
     target_link_libraries(okvis_app_synchronous ${VISensorDriver_LIBRARY})
+    target_link_libraries(okvis_app_mynteye_sample ${VISensorDriver_LIBRARY})
   endif()
   install(TARGETS okvis_app_synchronous
     # IMPORTANT: Add the executable to the "export-set"
