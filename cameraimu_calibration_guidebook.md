@@ -53,10 +53,10 @@ First move the folder of camera to kalibr's workspace, then creat calibration ba
 6. Camera stereo camera and imu.
 
     ```
-    $ kalibr_calibrate_imu_camera --target april_6x6_50x50cm.yaml --cam camchain-homehlkalibr_workspacecameracalib.yaml --imu imu.ymal --bag cameraimucalib.bag --bag-from-to 5 45
+    $ kalibr_calibrate_imu_camera --target april_6x6_50x50cm.yaml --cam camchain-homehlkalibr_workspacecameracalib.yaml --imu imu.yaml --bag cameraimucalib.bag --bag-from-to 5 45
     ```
 
-    `april_6x6_50x50cm.yaml` is the config file of calibration target which can download from the [website] (https://github.com/ethz-asl/kalibr/wiki/downloads), `camchain-homehlkalibr_workspacecameracalib.yaml` is the config file of stereo camera，`imu.ymal` is config file of imu, `from-to 5 45` means that it use bag from 5s to 45s to calibration.
+    `april_6x6_50x50cm.yaml` is the config file of calibration target which can download from the [website] (https://github.com/ethz-asl/kalibr/wiki/downloads), `camchain-homehlkalibr_workspacecameracalib.yaml` is the config file of stereo camera，`imu.yaml` is config file of imu in `mynt-eye-okvis-sample/config`, `from-to 5 45` means that it use bag from 5s to 45s to calibration.
 
     It will produce a file named 'camchain-imucam-homehlkalibr_workspacecameraimucalib.yaml' which store the result.
 
