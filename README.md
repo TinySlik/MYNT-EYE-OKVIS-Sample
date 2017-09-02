@@ -82,7 +82,7 @@ You will need to install the following dependencies,
 
         sudo apt-get install libboost-dev libboost-filesystem-dev
 
-* OpenCV 2.4-3.0: follow the instructions on http://opencv.org/ or install 
+* OpenCV 3.2: follow the instructions on http://opencv.org/ or install 
   via 
  
         sudo apt-get install libopencv-dev
