@@ -8,6 +8,8 @@ set(OKVIS_PATCH_VERSION 3)
 set(OKVIS_VERSION
   ${OKVIS_MAJOR_VERSION}.${OKVIS_MINOR_VERSION}.${OKVIS_PATCH_VERSION})
 
+
+
 # options for build configuration
 option (USE_SYSTEM_BRISK
         "Use brisk via find_package rather than downloading it as part of okvis" OFF) 
@@ -148,7 +150,7 @@ else()
   set(CERES_VERSION 1.9.0)
   set(CERES_TAG 7c57de5080c9f5a4f067e2d20b5f33bad5b1ade6) #version 1.9. Newer ones would need adaptation with ceres::ParameterBlock
   ExternalProject_Add(ceres_external
-    GIT_REPOSITORY https://ceres-solver.googlesource.com/ceres-solver
+    GIT_REPOSITORY https://github.com/ceres-solver/ceres-solver.git
     GIT_TAG ${CERES_TAG}
     UPDATE_COMMAND ""
     INSTALL_DIR ${CMAKE_BINARY_DIR}
@@ -285,6 +287,7 @@ if(DEFINED ENV{MYNTEYE_SDK_ROOT})
 endif()
 set(MYNT_SDK_LIB_DIR ${MYNTEYE_SDK_DIR}/lib)
 include_directories(${MYNTEYE_SDK_DIR}/include)
+message(STATUS "myntsdk '${MYNTEYE_SDK_DIR}'")
 
 include_directories(okvis_kinematics/include)
 add_subdirectory(okvis_kinematics)
