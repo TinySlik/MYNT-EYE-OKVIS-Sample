@@ -33,9 +33,7 @@
 
 /**
  * @file okvis_app_mynteye_sample.cpp
-
  This node goes through mynteye
-
  * @author MYNTEYE
  */
 
@@ -94,8 +92,8 @@ public:
         // just append the path
         Eigen::Vector3d r = T_WS.r();
         Eigen::Matrix3d C = T_WS.C();
-        double r_x = r[1]*(-1);
-        double r_y = r[0];
+        double r_x = r[1];
+        double r_y = r[0]*(-1);
         double r_z = r[2];
         _path.push_back(cv::Point2d(r_x, r_y));
         _heights.push_back(r[2]);
@@ -104,7 +102,7 @@ public:
             _min_x = r_x - _frameScale;
         if (r_y - _frameScale < _min_y)
             _min_y = r_y - _frameScale;
-        if (r_y < _min_z)
+        if (r_z < _min_z)
             _min_z = r_z;
         if (r_x + _frameScale > _max_x)
             _max_x = r_x + _frameScale;
@@ -295,12 +293,10 @@ int main(int argc, char **argv)
         image_seconds = image_time.substr(0,image_time.size()-9);
         image_nonseconds = image_time.substr(image_time.size()-9,9);
 
-
         okvis_estimator.display();
         poseViewer.display();
 
         size_t size = imudatas.size();
-
         t_image = okvis::Time(std::stoi(image_seconds),std::stoi(image_nonseconds));
 
         if(count > 20)
@@ -330,11 +326,8 @@ int main(int argc, char **argv)
             }
 
             //add the IMAGE measurement for (blocking) processing;
-            if(count%3==0)
-            {
-                okvis_estimator.addImage(t_image, 0, img_left);
-                okvis_estimator.addImage(t_image, 1, img_right);
-            }
+            okvis_estimator.addImage(t_image, 0, img_left);
+            okvis_estimator.addImage(t_image, 1, img_right);
         }
         count++;
     }
@@ -343,17 +336,3 @@ int main(int argc, char **argv)
     cv::destroyAllWindows();
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
