@@ -57,56 +57,77 @@ int main(int argc, char **argv)
     string img0fileName;
     string img1fileName;
     vector<IMUData> imudatas;
-    int count = 0;
     std::uint32_t timestamp;
-
-    while(count < n) {
+    int i = 0;
+    for(;;) {
         code = cam.Grab();
+
         if (code != ErrorCode::SUCCESS) {
-            std::cout << "Warning: Grab failed <" << code << ">" << std::endl;
             continue;
         }
 
         if (cam.RetrieveImage(img_left, View::VIEW_LEFT_UNRECTIFIED) == ErrorCode::SUCCESS &&
                 cam.RetrieveImage(img_right, View::VIEW_RIGHT_UNRECTIFIED) == ErrorCode::SUCCESS) {
+
             cv::imshow("left", img_left);
             cv::imshow("right", img_right);
-            char key = (char)cv::waitKey(1);
+
+            int key = cv::waitKey(1);
             if (key == 27 || key == 'q' || key == 'Q') {  // ESC/Q
                 break;
+
             }
-            if(count == 0)
-            {
-                cout << "press space key to capture image" << endl;
-            }
+            cout << "please press space key to start capture data" << endl;
+
             if(key == 32)
             {
-                cam.RetrieveIMUData(imudatas,timestamp);
-                sprintf(filename,"%014d",timestamp);
-                s4 = filename;
-                string s5 = "00000";
-                img0fileName = s1 + s4 + s5 + s3;
-                img1fileName = s2 + s4 + s5 + s3;
-                cv::imwrite(img0fileName.c_str(),img_left);
-                cv::imwrite(img1fileName.c_str(),img_right);
-                count ++;
-                cout << "count = " << count << endl;
-                cout << "press space key to continue capture image" << endl;
+                cout << "capturing ..." << endl;
+                for(; i < 3000; ++i) {
+                    code = cam.Grab();
 
+                    if (code != ErrorCode::SUCCESS) {
+                        continue;
+                    }
+
+                    if (cam.RetrieveImage(img_left, View::VIEW_LEFT_UNRECTIFIED) == ErrorCode::SUCCESS &&
+                            cam.RetrieveImage(img_right, View::VIEW_RIGHT_UNRECTIFIED) == ErrorCode::SUCCESS) {
+
+                        cv::imshow("left", img_left);
+                        cv::imshow("right", img_right);
+                        int key = cv::waitKey(1);
+                        if (key == 27 || key == 'q' || key == 'Q') {  // ESC/Q
+                            break;
+                        }
+
+                        if(i%5 == 0)
+                        {
+                            cam.RetrieveIMUData(imudatas,timestamp);
+                            sprintf(filename,"%014d",timestamp);
+                            s4 = filename;
+                            string s5 = "00000";
+                            img0fileName = s1 + s4 + s5 + s3;
+                            img1fileName = s2 + s4 + s5 + s3;
+                            cv::imwrite(img0fileName.c_str(),img_left);
+                            cv::imwrite(img1fileName.c_str(),img_right);
+                        }
+                    }
+                    cout << "i" <<i<<endl;
+                }
+                if(i == 3000)
+                {
+                    cout << "ok" << endl;
+                    break;
+                }
             }
+
+
         }
-
-
     }
-
 
     cam.Close();
     cv::destroyAllWindows();
 
-
-
     return 0;
-
 }
 
 
