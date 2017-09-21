@@ -44,6 +44,7 @@ int main(int argc, char **argv)
     }
     std::cout << "\033[1;32mPress ESC/Q on Windows to terminate\033[0m\n";
 
+    // cam.ActivateAsyncGrabFeature();
 
     ErrorCode code;
     cv::Mat img_left, img_right;
@@ -71,7 +72,6 @@ int main(int argc, char **argv)
         code = cam.Grab();
 
         if (code != ErrorCode::SUCCESS) {
-            std::cout << "Warning: Grab failed <" << code << ">" << std::endl;
             continue;
         }
 
@@ -91,11 +91,10 @@ int main(int argc, char **argv)
             if(key == 32)
             {
                 cout << "capturing ..." << endl;
-                for(; i < 4100; ++i) {
+                for(; i < 1800; ++i) {
                     code = cam.Grab();
 
                     if (code != ErrorCode::SUCCESS) {
-                        std::cout << "Warning: Grab failed <" << code << ">" << std::endl;
                         continue;
                     }
 
@@ -116,29 +115,26 @@ int main(int argc, char **argv)
                         img0fileName = s1 + s4 +s5+ s3;
                         img1fileName = s2 + s4 +s5+ s3;
                         size_t size = imudatas.size();
-                        if(i%3==0)
-                        {
-                            cv::imwrite(img0fileName.c_str(),img_left);
-                            cv::imwrite(img1fileName.c_str(),img_right);
-                        }
+
+                        cv::imwrite(img0fileName.c_str(),img_left);
+                        cv::imwrite(img1fileName.c_str(),img_right);
+
                         for(int k= 0;k<size;k++)
                         {
                             imudata = imudatas[k];
                             imu_time_ = timestamp + imudata.time_offset;
                             sprintf(filename,"%014llu",imu_time_);
                             imu_time = filename + s5;
-                            outFile << imu_time <<','<< (imudata.gyro_x/57.2956) << ',' << (imudata.gyro_y/57.2956) << ',' << (imudata.gyro_z/57.2956) <<','<<(imudata.accel_x*9.799) << ',' << (imudata.accel_y*9.799) << ',' << (imudata.accel_z*9.799)<<"\n";
+                            outFile << imu_time <<','<< (imudata.gyro_x/57.2956) << ',' << (imudata.gyro_y/57.2956) << ',' << (imudata.gyro_z/57.2956) <<','<<(imudata.accel_x*9.7959) << ',' << (imudata.accel_y*9.7959) << ',' << (imudata.accel_z*9.7959)<<"\n";
                         }
-
                     }
+                    cout << "i" <<i<<endl;
                 }
-
             }
-
-
         }
-        if(i == 4100)
+        if(i == 1800)
         {
+            cout<<"ok"<<endl;
             break;
         }
     }
