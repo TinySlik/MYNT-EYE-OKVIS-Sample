@@ -11,10 +11,10 @@
 
     ```
     $ cd mynt-eye-okvis-sample/build
-    $ ./okvis_app_getcameracalibdataset 1 ./camera/cam0/ ./camera/cam1/ 30
+    $ ./okvis_app_getcameracalibdataset 1 ./camera/cam0/ ./camera/cam1/ 
     ```
 
-    `1` means that it use video1, `./camera/cam0/` is the folder to store left images, `./camera/cam0/` is the folder to store right images, `30` means that it capture 30 photos.
+    `1` means that it use video1, `./camera/cam0/` is the folder to store left images, `./camera/cam0/` is the folder to store right images.
 
 2. Use kalibrbagcreate creat calibration bag of stereo camera.
 First move the folder of camera to kalibr's workspace, then creat calibration bag.
