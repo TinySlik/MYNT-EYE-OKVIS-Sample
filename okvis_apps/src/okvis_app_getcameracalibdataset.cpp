@@ -51,7 +51,7 @@ int main(int argc, char **argv)
     char filename[20]={0};
     string s1 = argv[2];  //left image path
     string s2 = argv[3];  //right image path
-    int n = stoi(argv[4]);      //image number
+
     string s3 = ".png";
     string s4;
     string img0fileName;
