@@ -13,9 +13,9 @@ please follow the steps below:
 
    note:just the 'How do I get set up' and 'Building the project' procedure of the Original OKVIS.
 
-3. Use `okvis_app_getcameraimucalibdataset` and `okvis_app_getcameracalibdataset` to get calibration dataset and follow the steps in `cameraimu_calibration_guidebook.md` to calibrate camera and imu.
+4. Go to *mynt-eye-okvis-sample/build* folder and Use `okvis_app_getcameraimucalibdataset` and `okvis_app_getcameracalibdataset` to get calibration dataset and follow the steps in `cameraimu_calibration_guidebook.md` to calibrate camera and imu.
 
-4. Run the application `okvis_app_mynteye_sample` ,
+5. Go to *mynt-eye-okvis-sample/build* folder and Run the application `okvis_app_mynteye_sample`.
 
     ```
     $ ./okvis_app_mynteye_sample ./../config/config_mynteye.yaml 1
@@ -23,7 +23,7 @@ please follow the steps below:
 
     `config_mynt_eye.yaml` is the config file, `1` stands for video1.
 
-5. You could know the running effect through the video [here](https://www.youtube.com/watch?v=MB3Fxkj32a8).
+6. You could know the running effect through the video [here](https://www.youtube.com/watch?v=MB3Fxkj32a8).
 
 The following is the README.md of the Original OKVIS.
 ---
