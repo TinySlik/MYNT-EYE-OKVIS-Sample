@@ -6,10 +6,10 @@ cameras:
          0, 0, 1, 0.01464,
           0.0, 0.0, 0.0, 1.0],
        image_dimension: [752, 480],
-       distortion_coefficients: [-3.5082708135674384e-01, 1.8292113178628855e-01, 0, 0],
+       distortion_coefficients: [-5.1918937682514543e-01, 4.20837438805634e-01, 0, 0],
        distortion_type: radialtangential,
-       focal_length: [4.4978648241157407e+02, 4.4508989190646679e+02],
-       principal_point: [3.5055391946210085e+02, 2.4559360974776709e+02]}
+       focal_length: [7.7003147982730127e+02, 7.4469643861280360e+02],
+       principal_point: [4.0152924152483871e+02, 2.5356245424744731e+02]}
 
 
 
@@ -20,10 +20,10 @@ cameras:
          0, 0, 1, 0.01464,
           0.0, 0.0, 0.0, 1.0],
        image_dimension: [752, 480],
-       distortion_coefficients: [9.9778117678661038e-01, -6.7208493724017391e-04, -6.6575307375664514e-02, 7.7492164021254761e-04],
+       distortion_coefficients: [-5.7178208702346933e-01, 5.5239698566440698e-01, 0, 0],
        distortion_type: radialtangential,
-       focal_length: [4.4978648241157407e+02, 4.4508989190646679e+02],
-       principal_point: [4.3159726351541184e+02, 2.4805752149984033e+02]}
+       focal_length: [7.7003147982730127e+02, 7.4469643861280360e+02],
+       principal_point: [4.5409938674290578e+02, 2.2397763871414691e+02]}
 
 
 
@@ -40,8 +40,8 @@ imu_params:
     g_max: 8.72665 # gyro saturation [rad/s]
     sigma_g_c: 0.01344956 # gyro noise density [rad/s/sqrt(Hz)]  9.0086e-05  12.0e-4
     sigma_a_c: 0.03647532 # accelerometer noise density [m/s^2/sqrt(Hz)]  7.6509e-02  8.0e-3
-    sigma_bg: 0.01 # gyro bias prior [rad/s]
-    sigma_ba: -0.2 # accelerometer bias prior [m/s^2]
+    sigma_bg: 0.03 # gyro bias prior [rad/s]0.001
+    sigma_ba: 0.1 # accelerometer bias prior [m/s^2]0.2
     sigma_gw_c: 0.00420015 # gyro drift noise density [rad/s^s/sqrt(Hz)]  5.5379e-05  4.0e-6
     sigma_aw_c: 0.00048713 # accelerometer drift noise density [m/s^2/sqrt(Hz)] 5.3271e-04  4.0e-5 
     tau: 3600.0 # reversion time constant, currently not in use [s]
@@ -83,12 +83,12 @@ useDriver: true
 
 # some options for how and what to publish -- optional in ROS-free version
 publishing_options:
-    publish_rate: 500                  # rate at which odometry updates are published only works properly if imu_rate/publish_rate is an integer!!
+    publish_rate: 25                  # rate at which odometry updates are published only works properly if imu_rate/publish_rate is an integer!!
     publishLandmarks: true             # select, if you want to publish landmarks at all
     landmarkQualityThreshold: 1.0e-2   # landmark with lower quality will not be published
     maximumLandmarkQuality: 0.05       # landmark with higher quality will be published with the maximum colour intensity
     maxPathLength: 20                  # maximum length of the published path
-    publishImuPropagatedState: true    # Should the state that is propagated with IMU messages be published? Or just the optimized ones?
+    publishImuPropagatedState: false    # Should the state that is propagated with IMU messages be published? Or just the optimized ones?
     # provide custom World frame Wc
     T_Wc_W:
         [1.0000, 0.0000, 0.0000, 0.0000,
